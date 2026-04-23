@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../components/bottom_nav_bar.dart';
 import 'cart_page.dart';
 import 'shop_page.dart';
+import 'favorites_page.dart';
+import 'profile_page.dart';
+import 'about_page.dart';
+import 'intro_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,12 +15,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // this selected index is to control the buttom navbar
+  // this selected index is to control the bottom navbar
   int _selectedIndex = 0;
 
   // this method will update our selected index
-  // when the user taps on the buttom bar
-  void NavigateButtomBar(int index) {
+  // when the user taps on the bottom bar
+  void navigateBottomBar(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -30,13 +33,20 @@ class _HomePageState extends State<HomePage> {
 
     // cart page
     const CartPage(),
+
+    // favorites page
+    const FavoritesPage(),
+
+    // profile page
+    const ProfilePage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       bottomNavigationBar: MyButtomNavBar(
-        onTabChange: (index) => NavigateButtomBar(index),
+        onTabChange: (index) => navigateBottomBar(index),
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -78,55 +88,77 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                // orther pages
-                const Padding(
-                  padding: const EdgeInsets.only(right: 25.0),
+                // Home
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
                   child: ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.home,
                       color: Colors.white,
                     ),
-                    title: Text(
+                    title: const Text(
                       "Home",
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      navigateBottomBar(0);
+                    },
                   ),
                 ),
 
-                // orther pages
-                const Padding(
-                  padding: const EdgeInsets.only(right: 25.0),
+                // About
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
                   child: ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.info,
                       color: Colors.white,
                     ),
-                    title: Text(
+                    title: const Text(
                       "About",
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AboutPage(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
             ),
-            // orther pages
-            const Padding(
-              padding: const EdgeInsets.only(left: 25.0, bottom: 35),
+            // Logout
+            Padding(
+              padding: const EdgeInsets.only(left: 25.0, bottom: 25),
               child: ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.logout,
                   color: Colors.white,
                 ),
-                title: Text(
+                title: const Text(
                   "Logout",
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const IntroPage(),
+                    ),
+                  );
+                },
               ),
             )
           ],

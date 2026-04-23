@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/shoe.dart';
 
+import '../pages/shoe_details_page.dart';
+
 class ShoeTile extends StatelessWidget {
   Shoe shoe;
   void Function()? onTap;
@@ -14,7 +16,7 @@ class ShoeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 25),
+      margin: const EdgeInsets.only(left: 25),
       width: 280,
       decoration: BoxDecoration(
         color: Colors.grey[100],
@@ -23,20 +25,41 @@ class ShoeTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // shoe pic
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(shoe.imagePath),
-          ),
+          // shoe pic + details (clickable)
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ShoeDetailPage(shoe: shoe),
+                ),
+              );
+            },
+            child: Column(
+              children: [
+                // shoe pic
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Hero(
+                    tag: shoe.name,
+                    child: Image.asset(shoe.imagePath),
+                  ),
+                ),
 
-          // description
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Text(
-              shoe.description,
-              style: TextStyle(color: Colors.grey[600]),
+                // description
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Text(
+                    shoe.description,
+                    style: TextStyle(color: Colors.grey[600]),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
           ),
+
           // price + details
           Padding(
             padding: const EdgeInsets.only(left: 25.0),

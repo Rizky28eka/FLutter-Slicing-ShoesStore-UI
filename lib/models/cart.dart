@@ -8,6 +8,8 @@ class Cart extends ChangeNotifier {
       name: "Xzero Napoleon",
       price: "2007",
       imagePath: 'lib/images/sepatu1.png',
+      category: 'Running',
+      isBestSeller: true,
       description:
           "Cheap shoes that are very branded from the brand have comfortable materials at a cheap price but not cheap at all, what are you waiting for? let's buy now!!",
     ),
@@ -15,6 +17,8 @@ class Cart extends ChangeNotifier {
       name: "Xzero Kawaki",
       price: "2004",
       imagePath: 'lib/images/sepatu2.png',
+      category: 'Basketball',
+      isBestSeller: true,
       description:
           "Cheap shoes that are very branded from the brand have comfortable materials at a cheap price but not cheap at all, what are you waiting for? let's buy now!!",
     ),
@@ -22,13 +26,17 @@ class Cart extends ChangeNotifier {
       name: "Xzero Dunk",
       price: "2000",
       imagePath: 'lib/images/sepatu3.png',
+      category: 'Casual',
+      isBestSeller: false,
       description:
           "Cheap shoes that are very branded from the brand have comfortable materials at a cheap price but not cheap at all, what are you waiting for? let's buy now!!",
     ),
     Shoe(
-      name: "Xzero freak",
+      name: "Xzero Freak",
       price: "1990",
       imagePath: 'lib/images/sepatu4.png',
+      category: 'Basketball',
+      isBestSeller: true,
       description:
           "Cheap shoes that are very branded from the brand have comfortable materials at a cheap price but not cheap at all, what are you waiting for? let's buy now!!",
     ),
@@ -36,6 +44,8 @@ class Cart extends ChangeNotifier {
       name: "Xzero Atlet",
       price: "1300",
       imagePath: 'lib/images/sepatu5.png',
+      category: 'Running',
+      isBestSeller: false,
       description:
           "Cheap shoes that are very branded from the brand have comfortable materials at a cheap price but not cheap at all, what are you waiting for? let's buy now!!",
     ),
@@ -43,6 +53,8 @@ class Cart extends ChangeNotifier {
       name: "Xzero Officos",
       price: "1200",
       imagePath: 'lib/images/sepatu6.png',
+      category: 'Casual',
+      isBestSeller: false,
       description:
           "Cheap shoes that are very branded from the brand have comfortable materials at a cheap price but not cheap at all, what are you waiting for? let's buy now!!",
     ),
@@ -50,6 +62,8 @@ class Cart extends ChangeNotifier {
       name: "Xzero Nandaime",
       price: "1000",
       imagePath: 'lib/images/sepatu7.png',
+      category: 'Casual',
+      isBestSeller: true,
       description:
           "Cheap shoes that are very branded from the brand have comfortable materials at a cheap price but not cheap at all, what are you waiting for? let's buy now!!",
     ),
@@ -57,6 +71,9 @@ class Cart extends ChangeNotifier {
 
   // list of item users cart
   List<Shoe> userCart = [];
+
+  // list of user favorites
+  List<Shoe> userFavorites = [];
 
   // get list of shoes for sale
   List<Shoe> getShoeList() {
@@ -66,6 +83,11 @@ class Cart extends ChangeNotifier {
   // get cart
   List<Shoe> getUseCart() {
     return userCart;
+  }
+
+  // get favorites
+  List<Shoe> getUserFavorites() {
+    return userFavorites;
   }
 
   // get item to cart
@@ -78,5 +100,20 @@ class Cart extends ChangeNotifier {
   void removeItemFromCart(Shoe shoe) {
     userCart.remove(shoe);
     notifyListeners();
+  }
+
+  // toggle favorite
+  void toggleFavorite(Shoe shoe) {
+    if (userFavorites.contains(shoe)) {
+      userFavorites.remove(shoe);
+    } else {
+      userFavorites.add(shoe);
+    }
+    notifyListeners();
+  }
+
+  // check if shoe is favorite
+  bool isFavorite(Shoe shoe) {
+    return userFavorites.contains(shoe);
   }
 }
