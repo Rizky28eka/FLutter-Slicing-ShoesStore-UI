@@ -81,7 +81,7 @@ class Cart extends ChangeNotifier {
   }
 
   // get cart
-  List<Shoe> getUseCart() {
+  List<Shoe> getUserCart() {
     return userCart;
   }
 

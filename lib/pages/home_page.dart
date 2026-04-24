@@ -6,6 +6,8 @@ import 'favorites_page.dart';
 import 'profile_page.dart';
 import 'about_page.dart';
 import 'intro_page.dart';
+import 'help_support_page.dart';
+import 'settings_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -105,6 +107,58 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.pop(context);
                       navigateBottomBar(0);
+                    },
+                  ),
+                ),
+
+                // Settings
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: ListTile(
+                    leading: const Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    title: const Text(
+                      "Settings",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                // Help
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: ListTile(
+                    leading: const Icon(
+                      Icons.help,
+                      color: Colors.white,
+                    ),
+                    title: const Text(
+                      "Help",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HelpSupportPage(),
+                        ),
+                      );
                     },
                   ),
                 ),

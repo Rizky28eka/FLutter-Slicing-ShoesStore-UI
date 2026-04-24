@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'edit_profile_page.dart';
+import 'order_history_page.dart';
+import 'address_book_page.dart';
+import 'payment_methods_page.dart';
+import 'settings_page.dart';
 import 'notifications_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -39,10 +43,41 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: [
-                  _profileItem(context, Icons.person, "Edit Profile"),
-                  _profileItem(context, Icons.shopping_bag, "My Orders"),
-                  _profileItem(context, Icons.location_on, "Shipping Address"),
-                  _profileItem(context, Icons.payment, "Payment Methods"),
+                  _profileItem(context, Icons.person, "Edit Profile", onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EditProfilePage(),
+                      ),
+                    );
+                  }),
+                  _profileItem(context, Icons.shopping_bag, "My Orders",
+                      onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderHistoryPage(),
+                      ),
+                    );
+                  }),
+                  _profileItem(context, Icons.location_on, "Shipping Address",
+                      onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddressBookPage(),
+                      ),
+                    );
+                  }),
+                  _profileItem(context, Icons.payment, "Payment Methods",
+                      onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PaymentMethodsPage(),
+                      ),
+                    );
+                  }),
                   _profileItem(context, Icons.notifications, "Notifications",
                       onTap: () {
                     Navigator.push(
@@ -52,7 +87,14 @@ class ProfilePage extends StatelessWidget {
                       ),
                     );
                   }),
-                  _profileItem(context, Icons.settings, "Settings"),
+                  _profileItem(context, Icons.settings, "Settings", onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),

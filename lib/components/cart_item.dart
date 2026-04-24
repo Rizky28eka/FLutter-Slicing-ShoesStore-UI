@@ -4,22 +4,17 @@ import 'package:sneaker_shop/models/cart.dart';
 
 import '../models/shoe.dart';
 
-class CartItem extends StatefulWidget {
-  Shoe shoe;
-  CartItem({super.key, required this.shoe});
-
-  @override
-  State<CartItem> createState() => _CartItemState();
-}
-
-class _CartItemState extends State<CartItem> {
-  // remove item from cart
-  void removeItemFromCart() {
-    Provider.of<Cart>(context, listen: false).removeItemFromCart(widget.shoe);
-  }
+class CartItem extends StatelessWidget {
+  final Shoe shoe;
+  const CartItem({super.key, required this.shoe});
 
   @override
   Widget build(BuildContext context) {
+    // remove item from cart
+    void removeItemFromCart() {
+      Provider.of<Cart>(context, listen: false).removeItemFromCart(shoe);
+    }
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey[50],
@@ -27,11 +22,11 @@ class _CartItemState extends State<CartItem> {
       ),
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
-        leading: Image.asset(widget.shoe.imagePath),
-        title: Text(widget.shoe.name),
-        subtitle: Text(widget.shoe.price),
+        leading: Image.asset(shoe.imagePath),
+        title: Text(shoe.name),
+        subtitle: Text('\$${shoe.price}'),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           onPressed: removeItemFromCart,
         ),
       ),

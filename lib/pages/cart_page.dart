@@ -4,6 +4,7 @@ import 'package:sneaker_shop/models/cart.dart';
 import 'package:sneaker_shop/models/shoe.dart';
 
 import '../components/cart_item.dart';
+import 'checkout_page.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -17,19 +18,19 @@ class CartPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // HEADING
-            Text(
+            const Text(
               "My Cart",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
 
             Expanded(
-              child: value.getUseCart().isEmpty
+              child: value.getUserCart().isEmpty
                   ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,10 +46,10 @@ class CartPage extends StatelessWidget {
                       ),
                     )
                   : ListView.builder(
-                      itemCount: value.getUseCart().length,
+                      itemCount: value.getUserCart().length,
                       itemBuilder: (context, index) {
                         // Get individual shoe
-                        Shoe individualShoe = value.getUseCart()[index];
+                        Shoe individualShoe = value.getUserCart()[index];
 
                         // return the cart item
                         return CartItem(
@@ -59,7 +60,7 @@ class CartPage extends StatelessWidget {
             ),
 
             // Total + Checkout
-            if (value.getUseCart().isNotEmpty)
+            if (value.getUserCart().isNotEmpty)
               Container(
                 padding: const EdgeInsets.only(top: 25, bottom: 25),
                 child: Column(
@@ -75,7 +76,7 @@ class CartPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "\$${value.getUseCart().fold(0, (sum, item) => sum + int.parse(item.price))}",
+                          "\$${value.getUserCart().fold(0, (sum, item) => sum + int.parse(item.price))}",
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -86,8 +87,11 @@ class CartPage extends StatelessWidget {
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Checkout successful! Thank you for your purchase.")),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CheckoutPage(),
+                          ),
                         );
                       },
                       child: Container(

@@ -5,6 +5,7 @@ import '../models/shoe.dart';
 import '../components/shoe_tile.dart';
 
 import 'all_shoes_page.dart';
+import 'search_page.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -45,24 +46,31 @@ class _ShopPageState extends State<ShopPage> {
         return Column(
           children: [
             // Search bar
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              margin: const EdgeInsets.symmetric(horizontal: 25),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: TextField(
-                onChanged: (val) {
-                  setState(() {
-                    searchQuery = val;
-                  });
-                },
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Search your sneakers...",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  suffixIcon: Icon(Icons.search, color: Colors.grey),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchPage(),
+                  ),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                margin: const EdgeInsets.symmetric(horizontal: 25),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Row(
+                  children: [
+                    Text(
+                      "Search your sneakers...",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Spacer(),
+                    Icon(Icons.search, color: Colors.grey),
+                  ],
                 ),
               ),
             ),
